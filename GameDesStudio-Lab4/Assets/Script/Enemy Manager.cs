@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] GameObject spawnArea;
     [SerializeField] List<GameObject> enemyTypes;
+    List<GameObject> enemies;
 
     // Difficulty setup
     [SerializeField] float spawnIntervalEasy;
@@ -28,6 +29,7 @@ public class EnemyManager : MonoBehaviour
     Dictionary<string, float> _currentMode;
 
     [SerializeField] Difficulty defaultDiff;
+
 
     private void Awake()
     {
@@ -44,10 +46,13 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        // set up easy mode parameter
         _easyMode = new Dictionary<string, float>();
         _easyMode["SpawnAmount"] = spawnAmountEasy;
         _easyMode["SpawnInterval"] = spawnIntervalEasy;
 
+        // set up hard mode parameter
         _hardMode = new Dictionary<string, float>();
         _hardMode["SpawnAmount"] = spawnAmountHard;
         _hardMode["SpawnInterval"] = spawnIntervalHard;
@@ -56,9 +61,11 @@ public class EnemyManager : MonoBehaviour
             SwitchMode(defaultDiff);
         }
 
+        // set up enemies list to reference later if necessary
+        enemies = new List<GameObject>();
 
-        SpawnEnemy();
-
+        //SpawnEnemy();
+        StartCoroutine(RepeatlySpawn());
     }
 
     // Update is called once per frame
@@ -78,6 +85,18 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    IEnumerator RepeatlySpawn()
+    {
+        while (true)
+        {
+            // Spawn enemy
+            SpawnEnemy();
+
+            // Wait for second
+            yield return new WaitForSeconds(_currentMode["SpawnInterval"]);
+        }
+    }
+
     public void SpawnEnemy()
     {
         SpriteRenderer _spawnArea = spawnArea.GetComponent<SpriteRenderer>();
@@ -85,17 +104,28 @@ public class EnemyManager : MonoBehaviour
 
             for (int i = 0; i < _currentMode["SpawnAmount"];i++)
             {
-                float x = Mathf.Round(Random.Range(_spawnArea.bounds.min.x, _spawnArea.bounds.max.x)*10)/10;
-                float y = Mathf.Round(Random.Range(_spawnArea.bounds.min.y, _spawnArea.bounds.max.y)*10)/10;
+                // Get random x from range (round to nearest 5 so they wou)
+                float x = Mathf.Round(Random.Range(_spawnArea.bounds.min.x, _spawnArea.bounds.max.x) /2)*2;
+                float y = Mathf.Round(Random.Range(_spawnArea.bounds.min.y, _spawnArea.bounds.max.y));
                 Vector2 pos = new Vector2(x,y);
+                //pos.Normalize();
+                Debug.Log(pos);
 
-                //Instantiate(spawn_soldier, pos, Quaternion.identity);
+                GameObject randomEnemyType = enemyTypes[Random.Range(0,enemyTypes.Count)];
+                GameObject newEnemy = Instantiate(randomEnemyType, pos, Quaternion.identity);
+                enemies.Add(newEnemy);
             }
         }
         else
         {
             Debug.Log("have not assign Spawn Area");
         }
+    }
+
+    public void DestroyEnemy(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+        Destroy(enemy);
     }
 
     public void DisplayDic(Dictionary<string, float> dic)

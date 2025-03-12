@@ -12,6 +12,11 @@ public abstract class EnemyClass : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
+    protected void Update()
+    {
+        Move();
+    }
+
     protected void Move()
     {
         if (rb == null)
