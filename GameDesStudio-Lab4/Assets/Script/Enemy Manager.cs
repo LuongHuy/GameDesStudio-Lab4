@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -64,8 +65,8 @@ public class EnemyManager : MonoBehaviour
         // set up enemies list to reference later if necessary
         enemies = new List<GameObject>();
 
-        //SpawnEnemy();
-        StartCoroutine(RepeatlySpawn());
+        SpawnEnemy();
+        //StartCoroutine(RepeatlySpawn());
     }
 
     // Update is called once per frame
@@ -97,7 +98,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy()
+    void SpawnEnemy()
     {
         SpriteRenderer _spawnArea = spawnArea.GetComponent<SpriteRenderer>();
         if (_spawnArea != null) {
@@ -108,12 +109,12 @@ public class EnemyManager : MonoBehaviour
                 float x = Mathf.Round(Random.Range(_spawnArea.bounds.min.x, _spawnArea.bounds.max.x) /2)*2;
                 float y = Mathf.Round(Random.Range(_spawnArea.bounds.min.y, _spawnArea.bounds.max.y));
                 Vector2 pos = new Vector2(x,y);
-                //pos.Normalize();
-                Debug.Log(pos);
 
-                GameObject randomEnemyType = enemyTypes[Random.Range(0,enemyTypes.Count)];
-                GameObject newEnemy = Instantiate(randomEnemyType, pos, Quaternion.identity);
-                enemies.Add(newEnemy);
+                GameObject randomEnemyObj = enemyTypes[Random.Range(0,enemyTypes.Count)];
+                GameObject newEnemy = randomEnemyObj.GetComponent<EnemyClass>().DeepClone(pos);
+
+                //GameObject newEnemy = Instantiate(randomEnemyType, pos, Quaternion.identity);
+
             }
         }
         else

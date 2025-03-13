@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyClass : MonoBehaviour
+public class EnemyClass : MonoBehaviour
 {
     [SerializeField] protected float movespeed;
     protected Rigidbody2D rb;
 
-    protected void Start()
+    protected virtual void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
+    // might change so Enemy Manager call this instead
     protected void Update()
     {
         Move();
     }
 
-    protected void Move()
+    public virtual void Move()
     {
         if (rb == null)
         {
@@ -28,12 +29,12 @@ public abstract class EnemyClass : MonoBehaviour
             rb.velocity = Vector2.up * -1 * movespeed;
         }
     }
-    protected EnemyClass DeepClone()
+
+    public virtual GameObject DeepClone(Vector2 pos)
     {
-        EnemyClass clone = (EnemyClass) MemberwiseClone();
+        GameObject clone = Instantiate(gameObject, pos, Quaternion.identity);
 
         return clone;
     }
-    protected abstract void Action();
 
 }
