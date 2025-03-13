@@ -24,8 +24,6 @@ public class Fish : EnemyClass
         // reset bullet position before firing
         Vector2 bulletPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f);
         bulletActual = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
-        //bulletActual.SetActive(false);
-        //bulletActual.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f);
         bulletActual.SetActive(true);
     }
 

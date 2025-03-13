@@ -25,12 +25,17 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float spawnIntervalHard;
     [SerializeField] float spawnAmountEasy;
     [SerializeField] float spawnAmountHard;
+
+    // Spawn interval reduce 
+    [SerializeField] float intervalReduceRate = 0.2f;
+    [SerializeField] float intervalReduceInterval=1f;
+
+    // Set up difficulty mode
     Dictionary<string, float> _easyMode;
     Dictionary<string, float> _hardMode;
     Dictionary<string, float> _currentMode;
 
     [SerializeField] Difficulty defaultDiff;
-
 
     private void Awake()
     {
@@ -67,6 +72,8 @@ public class EnemyManager : MonoBehaviour
 
         //SpawnEnemy();
         StartCoroutine(RepeatlySpawn());
+        //interval reduce 
+        StartCoroutine(RepeatlyReduceInterval());
     }
 
     // Update is called once per frame
@@ -86,6 +93,27 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    IEnumerator RepeatlyReduceInterval()
+    {
+        // start reduce after 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        while (true)
+        {
+            //Every interval 
+            yield return new WaitForSeconds(intervalReduceInterval);
+            ReduceInterval();
+        }
+    }
+    void ReduceInterval()
+    {
+        if (_currentMode != null)
+        {
+            //_currentMode["SpawnInterval"] -= intervalReduceRate;
+            _currentMode["SpawnInterval"] = _currentMode["SpawnInterval"] > 1 ? _currentMode["SpawnInterval"] - intervalReduceRate : 1;
+            Debug.Log("Spawning interval after reduce" + _currentMode["SpawnInterval"]);
+        }
+    }
     IEnumerator RepeatlySpawn()
     {
         while (true)
@@ -94,6 +122,7 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemy();
 
             // Wait for second
+            Debug.Log("Spawning interval: "+_currentMode["SpawnInterval"]);
             yield return new WaitForSeconds(_currentMode["SpawnInterval"]);
         }
     }
@@ -125,7 +154,6 @@ public class EnemyManager : MonoBehaviour
 
     public void DestroyEnemy(GameObject enemy)
     {
-        Debug.Log("Destroy enemy outside of screen");
         enemies.Remove(enemy);
         Destroy(enemy);
     }
