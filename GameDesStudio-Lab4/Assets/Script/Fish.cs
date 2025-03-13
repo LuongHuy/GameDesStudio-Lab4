@@ -22,7 +22,10 @@ public class Fish : EnemyClass
         yield return new WaitForSeconds(interval);
 
         // reset bullet position before firing
-        bulletActual.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y-0.5f);
+        Vector2 bulletPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f);
+        bulletActual = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
+        //bulletActual.SetActive(false);
+        //bulletActual.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f);
         bulletActual.SetActive(true);
     }
 
@@ -36,10 +39,7 @@ public class Fish : EnemyClass
         cloneFish.spawnLower = spawnLower;
         cloneFish.spawnUpper = spawnUpper;
 
-        // create a bullet
-        Vector2 bulletPos = new Vector2(clone.transform.position.x, clone.transform.position.y);
-        cloneFish.bulletActual = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
-        cloneFish.bulletActual.SetActive(false);
+        // create a bullet -- move to action
 
         return clone;
     }
