@@ -65,8 +65,8 @@ public class EnemyManager : MonoBehaviour
         // set up enemies list to reference later if necessary
         enemies = new List<GameObject>();
 
-        SpawnEnemy();
-        //StartCoroutine(RepeatlySpawn());
+        //SpawnEnemy();
+        StartCoroutine(RepeatlySpawn());
     }
 
     // Update is called once per frame
@@ -111,10 +111,10 @@ public class EnemyManager : MonoBehaviour
                 Vector2 pos = new Vector2(x,y);
 
                 GameObject randomEnemyObj = enemyTypes[Random.Range(0,enemyTypes.Count)];
-                GameObject newEnemy = randomEnemyObj.GetComponent<EnemyClass>().DeepClone(pos);
+                //GameObject newEnemy = randomEnemyObj.GetComponent<EnemyClass>().DeepClone(pos);
 
-                //GameObject newEnemy = Instantiate(randomEnemyType, pos, Quaternion.identity);
-
+                GameObject newEnemy = Instantiate(randomEnemyObj, pos, Quaternion.identity);
+                enemies.Add(newEnemy);
             }
         }
         else

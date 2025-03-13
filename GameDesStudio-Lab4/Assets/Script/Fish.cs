@@ -32,14 +32,6 @@ public class Fish : EnemyClass
     public override GameObject DeepClone(Vector2 clonePos)
     {
         GameObject clone = Instantiate(gameObject, clonePos, Quaternion.identity);
-        clone.transform.rotation = gameObject.transform.rotation;
-
-        // setup parameter
-        Fish cloneFish = clone.GetComponent<Fish>();
-        cloneFish.spawnLower = spawnLower;
-        cloneFish.spawnUpper = spawnUpper;
-
-        // create a bullet -- move to action
 
         return clone;
     }

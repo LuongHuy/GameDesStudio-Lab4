@@ -37,4 +37,12 @@ public class EnemyClass : MonoBehaviour
         return clone;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("destroy zone"))
+        {
+            EnemyManager.Instance.DestroyEnemy(this.gameObject);
+        }
+    }
+
 }
