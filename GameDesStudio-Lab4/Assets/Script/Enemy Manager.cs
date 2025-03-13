@@ -125,6 +125,7 @@ public class EnemyManager : MonoBehaviour
 
     public void DestroyEnemy(GameObject enemy)
     {
+        Debug.Log("Destroy enemy outside of screen");
         enemies.Remove(enemy);
         Destroy(enemy);
     }
