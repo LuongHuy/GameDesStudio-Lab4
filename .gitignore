@@ -11,6 +11,15 @@
 [Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
+GameDesStudio-Lab4/.utmp/
+GameDesStudio-Lab4/[Ll]ibrary/
+GameDesStudio-Lab4/[Tt]emp/
+/GameDesStudio-Lab4/[Oo]bj/
+/GameDesStudio-Lab4/[Bb]uild/
+/GameDesStudio-Lab4/[Bb]uilds/
+GameDesStudio-Lab4/[Ll]ogs/
+/GameDesStudio-Lab4/[Uu]ser[Ss]ettings/
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
