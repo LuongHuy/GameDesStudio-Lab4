@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
     public int scoreCount;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreTextInTotal;
     private void Awake()
     {
         if (instance == null)
@@ -20,5 +21,6 @@ public class ScoreManager : MonoBehaviour
     {
         scoreCount += score;
         scoreText.text = scoreCount.ToString();
+        scoreTextInTotal.text = scoreCount.ToString();
     }
 }
