@@ -162,7 +162,7 @@ MonoBehaviour:
   spawnAmountHard: 4
   intervalReduceRate: 0.2
   intervalReduceInterval: 1
-  defaultDiff: 0
+  defaultDiff: 1
 --- !u!1 &2765868552267604776
 GameObject:
   m_ObjectHideFlags: 0
