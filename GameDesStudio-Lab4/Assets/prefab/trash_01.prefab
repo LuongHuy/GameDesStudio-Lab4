@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8859839407309959137}
   - component: {fileID: 5026421447268036185}
   - component: {fileID: 1061239676378036557}
+  - component: {fileID: 5533497810039926782}
   m_Layer: 0
   m_Name: trash_01
   m_TagString: Untagged
@@ -175,3 +176,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movespeed: 2
+--- !u!114 &5533497810039926782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3649251459568307301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e17d2380c207f40ba3b0db53e04043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  scoreAdd: 5
