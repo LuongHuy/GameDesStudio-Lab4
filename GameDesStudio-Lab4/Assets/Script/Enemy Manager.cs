@@ -139,7 +139,7 @@ public class EnemyManager : MonoBehaviour
                 GameObject randomEnemyObj = enemyTypes[Random.Range(0,enemyTypes.Count)];
                 //GameObject newEnemy = randomEnemyObj.GetComponent<EnemyClass>().DeepClone(pos);
 
-                GameObject newEnemy = Instantiate(randomEnemyObj, pos, Quaternion.identity);
+                GameObject newEnemy = Instantiate(randomEnemyObj, pos, Quaternion.Euler(0,0,-90));
                 enemies.Add(newEnemy);
             }
         }
