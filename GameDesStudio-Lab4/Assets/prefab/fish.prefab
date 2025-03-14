@@ -281,6 +281,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1938982395897330531}
   spawnLower: 1
   spawnUpper: 3
+  audioClip: {fileID: 8300000, guid: 1f4d5a20f66e2b64fbc706c94d564d4b, type: 3}
 --- !u!50 &2283712255511282699
 Rigidbody2D:
   serializedVersion: 4

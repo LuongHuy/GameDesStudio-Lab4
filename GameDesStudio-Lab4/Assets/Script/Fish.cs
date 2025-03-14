@@ -9,6 +9,8 @@ public class Fish : EnemyClass
     public float spawnLower;
     public float spawnUpper;
 
+    [SerializeField] AudioClip audioClip;
+
     protected override void Start()
     {
         base.Start();
@@ -25,6 +27,7 @@ public class Fish : EnemyClass
         Vector2 bulletPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f);
         bulletActual = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
         bulletActual.SetActive(true);
+        SoundManager.Instance.playVFX(audioClip, transform);
     }
 
     public override GameObject DeepClone(Vector2 clonePos)
