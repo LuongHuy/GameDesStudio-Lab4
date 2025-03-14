@@ -42,7 +42,6 @@ public class SoundManager : MonoBehaviour
     // Link this to slider controlling the background sound. 
     public void AdjustMusicVolumn()
     {
-        Debug.Log("Adjust Background volumn");
         float volumn = Mathf.Log10(bgMusicSlider.value)*20;
         audioMixer.SetFloat("Music",volumn);
     }
@@ -50,7 +49,6 @@ public class SoundManager : MonoBehaviour
     // Link this to slider controlling the VFX sound. 
     public void AdjustVfxVolumn()
     {
-        Debug.Log("Adjust VFX volumn");
         float volumn = Mathf.Log10(vfxSlider.value)*20;
         audioMixer.SetFloat("VFX",volumn);
     }
@@ -58,7 +56,6 @@ public class SoundManager : MonoBehaviour
     // Link this to slider controlling the master sound. 
     public void AdjustMasterVolumn()
     {
-        Debug.Log("Adjust Master volumn");
         float volumn = Mathf.Log10(masterSlider.value)*20;
         audioMixer.SetFloat("MasterSound",volumn);
     }

@@ -24,7 +24,7 @@ public class Fish : EnemyClass
         yield return new WaitForSeconds(interval);
         
         // play sound effect
-        SoundManager.Instance.playVFX(audioClip, transform);
+        //SoundManager.Instance.playVFX(audioClip, transform);
 
         // reset bullet position before firing
         Vector2 bulletPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f);
