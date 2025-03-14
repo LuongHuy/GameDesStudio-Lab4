@@ -7,6 +7,7 @@ using UnityEngine.VFX;
 
 public enum Difficulty { 
 Easy,
+Medium,
 Hard
 }
 
@@ -21,16 +22,27 @@ public class EnemyManager : MonoBehaviour
     List<GameObject> enemies;
 
     // Difficulty setup
-    [SerializeField] float spawnIntervalEasy;
-    [SerializeField] float spawnIntervalHard;
-    [SerializeField] float spawnAmountEasy;
-    [SerializeField] float spawnAmountHard;
+    // easy
+    [SerializeField] float spawnIntervalEasy=6f;
+    [SerializeField] float spawnAmountEasy=1f;
+    // medium
+    [SerializeField] float spawnIntervalMedium=5f;
+    [SerializeField] float spawnAmountMedium=3f;
+    // hard
+    [SerializeField] float spawnIntervalHard = 4f;
+    [SerializeField] float spawnAmountHard = 4f;
+
+    // Spawn interval reduce 
+    [SerializeField] float intervalReduceRate = 0.2f;
+    [SerializeField] float intervalReduceInterval=1f;
+
+    // Set up difficulty mode
     Dictionary<string, float> _easyMode;
+    Dictionary<string, float> _mediumMode;
     Dictionary<string, float> _hardMode;
     Dictionary<string, float> _currentMode;
 
     [SerializeField] Difficulty defaultDiff;
-
 
     private void Awake()
     {
@@ -47,11 +59,15 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         // set up easy mode parameter
         _easyMode = new Dictionary<string, float>();
         _easyMode["SpawnAmount"] = spawnAmountEasy;
         _easyMode["SpawnInterval"] = spawnIntervalEasy;
+
+        // set up medium mode parameter
+        _mediumMode = new Dictionary<string, float>();
+        _mediumMode["SpawnAmount"] = spawnAmountMedium;
+        _mediumMode["SpawnInterval"] = spawnIntervalMedium;
 
         // set up hard mode parameter
         _hardMode = new Dictionary<string, float>();
@@ -67,25 +83,35 @@ public class EnemyManager : MonoBehaviour
 
         //SpawnEnemy();
         StartCoroutine(RepeatlySpawn());
+        //interval reduce 
+        StartCoroutine(RepeatlyReduceInterval());
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
-    public void SwitchMode(Difficulty dif)
+    IEnumerator RepeatlyReduceInterval()
     {
-        if (dif == Difficulty.Easy)
+        // start reduce after 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        while (true)
         {
-            _currentMode = _easyMode;
-        }
-        else if (dif == Difficulty.Hard) { 
-            _currentMode = _hardMode;
+            //Every interval 
+            yield return new WaitForSeconds(intervalReduceInterval);
+            ReduceInterval();
         }
     }
-
+    void ReduceInterval()
+    {
+        if (_currentMode != null)
+        {
+            //_currentMode["SpawnInterval"] -= intervalReduceRate;
+            _currentMode["SpawnInterval"] = _currentMode["SpawnInterval"] > 1 ? _currentMode["SpawnInterval"] - intervalReduceRate : 1;
+        }
+    }
     IEnumerator RepeatlySpawn()
     {
         while (true)
@@ -113,7 +139,7 @@ public class EnemyManager : MonoBehaviour
                 GameObject randomEnemyObj = enemyTypes[Random.Range(0,enemyTypes.Count)];
                 //GameObject newEnemy = randomEnemyObj.GetComponent<EnemyClass>().DeepClone(pos);
 
-                GameObject newEnemy = Instantiate(randomEnemyObj, pos, Quaternion.identity);
+                GameObject newEnemy = Instantiate(randomEnemyObj, pos, Quaternion.Euler(0,0,-90));
                 enemies.Add(newEnemy);
             }
         }
@@ -125,7 +151,6 @@ public class EnemyManager : MonoBehaviour
 
     public void DestroyEnemy(GameObject enemy)
     {
-        Debug.Log("Destroy enemy outside of screen");
         enemies.Remove(enemy);
         Destroy(enemy);
     }
@@ -135,6 +160,44 @@ public class EnemyManager : MonoBehaviour
         foreach (KeyValuePair<string, float> kvp in dic)
         {
             Debug.Log("Key: " + kvp.Key + " , Value: " + kvp.Value);
+        }
+    }
+
+    public void SwitchDifficulty(string dif)
+    {
+        Debug.Log(dif);
+        switch (dif)
+        {
+            case "Easy":
+                SwitchMode(Difficulty.Easy);
+                break;
+            case "Normal":
+                SwitchMode(Difficulty.Medium);
+                break;
+            case "Hard":
+                SwitchMode(Difficulty.Hard);
+                break;
+            default:
+                Debug.Log("Keyword not found");
+                break;
+        }
+    }
+    void SwitchMode(Difficulty dif)
+    {
+        switch (dif)
+        {
+            case Difficulty.Easy:
+                _currentMode = _easyMode;
+                break;
+            case Difficulty.Medium:
+                _currentMode = _mediumMode;
+                break;
+            case Difficulty.Hard:
+                _currentMode = _hardMode;
+                break;
+            default:
+                Debug.Log("value not found");
+                break;
         }
     }
 }

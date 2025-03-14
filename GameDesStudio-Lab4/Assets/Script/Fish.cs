@@ -9,6 +9,8 @@ public class Fish : EnemyClass
     public float spawnLower;
     public float spawnUpper;
 
+    [SerializeField] AudioClip audioClip;
+
     protected override void Start()
     {
         base.Start();
@@ -20,12 +22,13 @@ public class Fish : EnemyClass
         // wait for random second
         float interval = Random.Range(spawnLower, spawnUpper); 
         yield return new WaitForSeconds(interval);
+        
+        // play sound effect
+        SoundManager.Instance.playVFX(audioClip, transform);
 
         // reset bullet position before firing
         Vector2 bulletPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f);
         bulletActual = Instantiate(bulletPrefab, bulletPos, Quaternion.identity);
-        //bulletActual.SetActive(false);
-        //bulletActual.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f);
         bulletActual.SetActive(true);
     }
 
