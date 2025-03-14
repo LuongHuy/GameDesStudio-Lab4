@@ -39,6 +39,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // Script to adjust volumn using slider. Attach to slider
+    // Link this to slider controlling the background sound. 
     public void AdjustMusicVolumn()
     {
         Debug.Log("Adjust Background volumn");
@@ -46,12 +47,15 @@ public class SoundManager : MonoBehaviour
         audioMixer.SetFloat("Music",volumn);
     }
 
+    // Link this to slider controlling the VFX sound. 
     public void AdjustVfxVolumn()
     {
         Debug.Log("Adjust VFX volumn");
         float volumn = Mathf.Log10(vfxSlider.value)*20;
         audioMixer.SetFloat("VFX",volumn);
     }
+
+    // Link this to slider controlling the master sound. 
     public void AdjustMasterVolumn()
     {
         Debug.Log("Adjust Master volumn");
@@ -59,7 +63,7 @@ public class SoundManager : MonoBehaviour
         audioMixer.SetFloat("MasterSound",volumn);
     }
 
-    // Script to play music or vfx
+    // Script to play background music
     public void playBackground()
     {
         bgMusic.loop = true;
@@ -67,6 +71,8 @@ public class SoundManager : MonoBehaviour
         bgMusic.Play();
     }
 
+    // This is to play VFX. call this function whenever a new VFX is played. 
+    // This create a new object, and destroy it after the sound is done. This is so multiple VFX can be played at the same time.
     public void playVFX(AudioClip audioClip, Transform spamTrans)
     {
         // spam in game object

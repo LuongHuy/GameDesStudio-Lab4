@@ -163,6 +163,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    // Function for switching difficulty. called by DiificultyAdjustDropdown.cs
     public void SwitchDifficulty(string dif)
     {
         Debug.Log(dif);
