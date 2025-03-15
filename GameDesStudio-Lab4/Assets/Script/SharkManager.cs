@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,7 @@ public class SharkManager : MonoBehaviour
 {
     public int sharkLives = 3; // Shark starts with 3 lives
     public Text livesText; // UI Text for displaying lives
+    public SpriteRenderer renderer;
 
     void Start()
     {
@@ -45,11 +47,20 @@ public class SharkManager : MonoBehaviour
     {
         sharkLives--;
 
-        if (sharkLives < 0)
+        if (sharkLives <= 0)
         {
             sharkLives = 0; // Prevents negative lives
+            FindObjectOfType<GameManager>().GameOver();
+        }
+        else
+        {
+            LoseLifeEffect();
         }
 
         UpdateLivesUI();
+    }
+    void LoseLifeEffect()
+    {
+        renderer.DOColor(Color.red, 0.2f).OnComplete(() => renderer.DOColor(Color.white, 0.2f));
     }
 }

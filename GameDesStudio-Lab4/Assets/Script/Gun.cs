@@ -8,6 +8,7 @@ public class Gun : MonoBehaviour
     public Transform findTransform;
     private float tempDelayTime;
     public float delayTime;
+    public AudioClip fire;
     private void Shoot()
     {
         if (tempDelayTime > Time.time)
@@ -17,6 +18,7 @@ public class Gun : MonoBehaviour
         tempDelayTime = Time.time + delayTime;
 
         Instantiate(Bullet,findTransform.position,Quaternion.identity);
+        SoundManager.Instance.playVFX(fire,transform);
         
     }
 

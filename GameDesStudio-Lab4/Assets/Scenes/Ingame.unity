@@ -7950,6 +7950,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464983441318428836, guid: 0b5af41ebd33b1741ac957ca514f9ab5, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 736459760}
+    - target: {fileID: 1464983441318428836, guid: 0b5af41ebd33b1741ac957ca514f9ab5, type: 3}
       propertyPath: moveSpeed
       value: 9
       objectReference: {fileID: 0}
@@ -8621,6 +8625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharkLives: 3
   livesText: {fileID: 370682943}
+  renderer: {fileID: 2013214788}
 --- !u!61 &2013214783
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8667,6 +8672,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.46, y: 1.62}
   m_EdgeRadius: 0
+--- !u!212 &2013214788 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1548333721728674119, guid: 0b5af41ebd33b1741ac957ca514f9ab5, type: 3}
+  m_PrefabInstance: {fileID: 1797168301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2032494491
 GameObject:
   m_ObjectHideFlags: 0
