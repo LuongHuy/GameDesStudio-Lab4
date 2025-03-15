@@ -3,7 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject gameOverUI; // Drag "EndGame" from Hierarchy into this in Unity
+    public GameObject gameOverUI; // Drag "EndGame" UI here in Unity Inspector
+
+    void Start()
+    {
+        gameOverUI.SetActive(false); // Hide Game Over UI at start
+    }
 
     public void GameOver()
     {
@@ -13,19 +18,13 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1; // Resume game speed
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload current scene
+        Time.timeScale = 1; // Resume time
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload scene
     }
 
     public void BackToMenu()
     {
-        Time.timeScale = 1; // Reset time before loading
-        SceneManager.LoadScene("MainMenu"); // Change "MainMenu" to your actual menu scene name
-    }
-
-
-    void Start()
-    {
-        gameOverUI.SetActive(false); // Hide Game Over UI when the game starts
+        Time.timeScale = 1; // Ensure game speed is reset
+        SceneManager.LoadScene("MainMenu"); // Load Main Menu scene
     }
 }
