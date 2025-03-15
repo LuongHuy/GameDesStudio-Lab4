@@ -51,5 +51,10 @@ public class SharkManager : MonoBehaviour
         }
 
         UpdateLivesUI();
+
+        if (sharkLives == 0)
+        {
+            FindObjectOfType<GameManager>().GameOver(); // Trigger Game Over
+        }
     }
 }

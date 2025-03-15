@@ -44,6 +44,11 @@ public class BaseHealth : MonoBehaviour
             currentHealth = 0; // Prevent negative health
         }
         UpdateHealthUI();
+
+        if (currentHealth == 0)
+        {
+            FindObjectOfType<GameManager>().GameOver(); // Trigger Game Over
+        }
     }
 
     void RegenerateHealth()
