@@ -4503,7 +4503,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1671590420}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: AdjustMasterVolumn
+        m_MethodName: AdjustMusicVolumn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5994,7 +5994,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1671590420}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: AdjustMasterVolumn
+        m_MethodName: AdjustVfxVolumn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
